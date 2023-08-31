@@ -1,0 +1,30 @@
+{
+  "name": "product-dummy",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@auth0/auth0-spa-js": "^2.1.2",
+    "@auth0/auth0-vue": "^2.3.1",
+    "axios": "^1.5.0",
+    "chalk": "^5.3.0",
+    "flowbite-vue": "^0.0.17-next.2",
+    "noty": "^3.2.0-beta-deprecated",
+    "pinia": "^2.1.6",
+    "vue": "^3.3.4",
+    "vue-i18n": "9",
+    "vue-router": "^4.2.4",
+    "vue-toastification": "^2.0.0-rc.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.3.1",
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.9"
+  }
+}
