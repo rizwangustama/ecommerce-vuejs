@@ -11,6 +11,8 @@ import "vue-toastification/dist/index.css";
 
 import enMessages from './locales/en.json';
 import frMessages from './locales/fr.json';
+import Vue3Marquee from 'vue3-marquee'
+
 
 import { createI18n } from 'vue-i18n';
 
@@ -50,7 +52,7 @@ const options = {
 //       fr: import('./locales/fr.json')
 //     }
 // });
-
+app.use(Vue3Marquee)
 app.use(i18n)
 app.use(Toast, options)
 app.use(createPinia())
