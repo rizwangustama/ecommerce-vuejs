@@ -8,8 +8,6 @@
                     <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
                 </a>
                 <div class="flex items-center lg:order-2 gap-5">
-                    <Button color="default" @click="changeLanguage('en')">En</Button>
-                    <Button color="alternative" @click="changeLanguage('fr')">Fr</Button>
                     <div class="relative" @click="goToCart">
                         <svg class="w-5 h-5 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1"/>
@@ -22,6 +20,8 @@
                         <Avatar size="sm" status="online" :img="user.avatar" rounded/>
                     </div>
                    
+                    <Button color="dark" @click="changeLanguage(!changeBahasa ? 'fr': 'en')">{{ changeBahasa ? 'Indonesia' : 'English'}}</Button>
+                    <!-- <Button color="alternative" v-else @click="changeLanguage('fr')">Indonesia</Button> -->
                     <Button @click="logout" class="hover:text-black" color="alternative">
                         Logout
                     </Button>
@@ -48,7 +48,7 @@
                         <li>
                             <RouterLink to="/home"
                                 class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
-                                aria-current="page">Home
+                                aria-current="page">{{ $t('label.home') }}
                             </RouterLink>
                         </li>
                         <!-- <li v-for="( data , index ) in categoryList">
@@ -56,7 +56,7 @@
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700" style="text-transform: capitalize;">{{ data }}</a>
                         </li> -->
                         <li id="category">
-                            <a class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Category</a> 
+                            <a class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">{{ $t('label.category') }}</a> 
 
                             <div id="categoryHover" class="z-10 absolute top-0 pt-[80px]">
                                 <div  class="top-full bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
@@ -71,15 +71,15 @@
 
                         <li>
                             <a href="#"
-                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</a>
+                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">{{ $t('label.features') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Team</a>
+                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">{{ $t('label.team') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">{{ $t('label.contact') }}</a>
                         </li>
                     </ul>
                 </div>
@@ -126,12 +126,14 @@ import { useProductStore } from '../stores/product'
 import { useProfileStore } from '../stores/profile';
 import { useLoginStore } from '../stores/login'
 import { Button, Avatar, Modal, Input } from 'flowbite-vue'
+import FlagIndonesia from '../components/icons/FlagIndonesia.vue'
 export default {
     components: {
         Button,
         Avatar,
         Modal,
-        Input
+        Input,
+        FlagIndonesia,
     },
 
     data() {
@@ -142,7 +144,8 @@ export default {
             categoryList,
             user,
             isShowModal: false,
-            temp_user: {}
+            temp_user: {},
+            changeBahasa: false,
         }
     },
 
@@ -161,7 +164,7 @@ export default {
 
     methods: {
         changeLanguage(locale) {
-            console.log(locale)
+            this.changeBahasa = !this.changeBahasa;
             this.$i18n.locale = locale;
         },
         logout() {

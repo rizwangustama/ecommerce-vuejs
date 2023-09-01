@@ -15,10 +15,8 @@
        "email": "Your Email",
        "password": "Your Password",
        "confirm_password": "Confirm password",
-       "remeber_me" : "Remember Me",
+       "remember_me" : "Remember Me",
        "forgot_password" : "Forgot Password",
        "dont_have_account": "Don't have an account yet?"
-    },
-    "label_ku": "Hello Labelku",
-    "message": "Welcome to Rizwan Gustama"
+    }
 }

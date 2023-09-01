@@ -1142,6 +1142,16 @@ vue-toastification@^2.0.0-rc.5:
   resolved "https://registry.yarnpkg.com/vue-toastification/-/vue-toastification-2.0.0-rc.5.tgz#92798604d806ae473cfb76ed776fae294280f8f8"
   integrity sha512-q73e5jy6gucEO/U+P48hqX+/qyXDozAGmaGgLFm5tXX4wJBcVsnGp4e/iJqlm9xzHETYOilUuwOUje2Qg1JdwA==
 
+vue3-carousel@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/vue3-carousel/-/vue3-carousel-0.3.1.tgz#d001be7dea416dc2f4e66afc4d56af66696dc117"
+  integrity sha512-86vUkNPBzL2PVuR9w6hUsI90ccFjLp+K8cSFpRTISf+SjUQY3fMHc5CFF5MUL62v1xYYm27zEBmQupO9VQx9Kw==
+
+vue3-marquee@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/vue3-marquee/-/vue3-marquee-4.0.0.tgz#137002148db3d81eead68e989fd4fcf37e9421b6"
+  integrity sha512-/CPyAi0TQM2Cdcf8PBT/A7uXRVHHncN3MyKRcFBqkj5ph2tlVk08D5K6fyY2S5tYscgLJc3ma2vhPTrrkZih1A==
+
 vue@^3.2.41, vue@^3.3.4:
   version "3.3.4"
   resolved "https://registry.npmjs.org/vue/-/vue-3.3.4.tgz"
