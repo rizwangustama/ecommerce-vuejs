@@ -38,7 +38,6 @@
             <IconMailchim />
             <IconMashable />
           </div>
-
         </Vue3Marquee>
       </div>
     </section>

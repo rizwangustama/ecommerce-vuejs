@@ -21,7 +21,8 @@
                 <div class="border-t-2">
                     <div class="flex flex-row py-5">
                         <div class="flex-1 border-r-2 pl-5">
-                            <h2 class="text-3xl font-bold">Price $ {{ detail.price }}</h2>
+                            <h2 class="text-3xl font-bold">Price {{ this.formatPrice(detail.price) }}</h2>
+                            <h2>Total Stok : {{ stok }}</h2>
                             <h2>Total {{ this.formatPrice(totalPrice) }}</h2>
                         </div>
                         <div class="flex-1 flex items-center">
@@ -33,13 +34,11 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-6 border-t-2 pt-10">      
-                        <!-- <Button v-if="totalPrice !== 0" size="xl" @click="addToCart(detail)" gradient="blue" shadow>Buy</Button> -->
+                    <div class="grid grid-cols-2 gap-6 border-t-2 pt-10">
                         <Button :disabled="totalPrice == 0" size="xl" @click="addToCart(detail)" color="blue" outline>Buy</Button>
                         <Button @click="addToCart(detail)" color="blue">Add to Cart</Button>
                     </div>
                 </div>
-                <!-- <p>{{ detail }}</p> -->
             </div>
         </div>
         <div class="grid grid-cols-1 gap-3">
@@ -82,6 +81,9 @@ export default {
         },
         totalPrice() {
             return this.detail.price * this.total;
+        },
+        stok() {
+            return Math.floor(Math.random() * 100 + 1)
         }
     },
     async mounted() {
@@ -98,7 +100,6 @@ export default {
         },
 
         addToCart(data) {
-            // useProductStore.addToCart(data);
             const { addToCart } = useProductStore();
             addToCart(data);
         },
@@ -109,8 +110,8 @@ export default {
         },
         addTotal(){
             this.total ++;
-            if (this.total > 10) {
-                this.total = 0;
+            if (this.total > this.stok) {
+                this.total = this.stok;
             }
         },
         removeTotal(){
@@ -120,21 +121,5 @@ export default {
             }
         }
     },
-    // mounted() {
-    //     this.getDetail();
-    //     this.product(this.$route.params.id)
-    // },
-    // methods: {
-    //     getDetail() {
-    //         this.$axios.get('/products/' + this.id)
-    //         .then((res) => {
-    //             this.details = res.data;
-    //             console.log(res)
-    //         }).catch((error) => {})
-    //     },
-    //     async product(id) {
-    //         await this.userStore.fetchProduct();
-    //     }
-    // },
 }
 </script>
