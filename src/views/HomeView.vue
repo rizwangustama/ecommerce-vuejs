@@ -86,7 +86,7 @@
     <section class="pt-10 pb-[120px]">
       <div class="container">
         <div class="grid grid-cols-4 gap-4">
-          <div v-for="(data, index) in products" class="shadow-lg flex flex-col justify-between rounded-xl">
+          <div v-for="(data, index) in listProduct" class="shadow-lg flex flex-col justify-between rounded-xl">
             <a class="cursor-pointer p-5 rounded-t-xl " @click="view(data.id)">
               <img class="overflow-hidden rounded-lg h-[250px] w-full object-cover" :src="data.images[0]"
                 alt="product image" />
@@ -122,7 +122,7 @@
                     d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                 </svg>
                 <span
-                  class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">4.5</span>
+                  class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{{ data.category.name }}</span>
               </div>
               <div class="flex items-center justify-between">
                 <span class="text-3xl font-bold text-gray-900 dark:text-white">{{ this.formatPrice(data.price) }}</span>
@@ -194,16 +194,17 @@ export default {
   watch: {
     filterCategory: 'getProduct'
   },
-  mounted() {
-    this.getProductAll();
+  async mounted() {
+    await this.getProductAll();
+    this.listProduct = this.products;
   },
   methods: {
-    getProductAll() {
+    async getProductAll() {
       const offset = this.offset;
       const title = this.search.title;
-      const { getProduct, getProductByCategory, getCategory } = useProductStore();
-      getProductByCategory(this.search.category, this.search.title, this.search.max_price, this.search.min_price, this.offset);
-      getCategory();
+      const { getProduct, getProductByCategory, getCategory } = await useProductStore();
+      await getProductByCategory(this.search.category, this.search.title, this.search.max_price, this.search.min_price, this.offset);
+      await getCategory();
     },
     showDropdown() {
       this.isActive = !this.isActive;
@@ -211,6 +212,7 @@ export default {
     nextPage() {
       this.offset += 12;
       this.getProductAll();
+      this.listProduct.push(...this.products);
     },
     view(id) {
       this.$router.push('detail-product/' + id);

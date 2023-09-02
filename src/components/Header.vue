@@ -20,7 +20,7 @@
                         <Avatar size="sm" status="online" :img="user.avatar" rounded/>
                     </div>
                    
-                    <Button color="dark" @click="changeLanguage(!changeBahasa ? 'fr': 'en')">{{ changeBahasa ? 'Indonesia' : 'English'}}</Button>
+                    <Button color="default" @click="changeLanguage(!changeBahasa ? 'fr': 'en')">{{ changeBahasa ? 'Indonesia' : 'English'}}</Button>
                     <!-- <Button color="alternative" v-else @click="changeLanguage('fr')">Indonesia</Button> -->
                     <Button @click="logout" class="hover:text-black" color="alternative">
                         Logout
@@ -51,10 +51,6 @@
                                 aria-current="page">{{ $t('label.home') }}
                             </RouterLink>
                         </li>
-                        <!-- <li v-for="( data , index ) in categoryList">
-                            <a :href="`/category?name=${data}`"
-                                class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700" style="text-transform: capitalize;">{{ data }}</a>
-                        </li> -->
                         <li id="category">
                             <a class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">{{ $t('label.category') }}</a> 
 
