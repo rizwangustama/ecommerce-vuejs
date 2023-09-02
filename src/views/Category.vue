@@ -35,7 +35,7 @@
         <section class="pt-10 pb-[120px]">
             <div class="container">
                 <div class="grid grid-cols-4 gap-4">
-                    <div v-for="(data, index) in products" class="shadow-lg flex flex-col justify-between rounded-xl">
+                    <div v-for="(data, index) in listProduct" class="shadow-lg flex flex-col justify-between rounded-xl">
                         <a class="cursor-pointer p-5 rounded-t-xl " @click="view(data.id)">
                             <img class="overflow-hidden rounded-lg h-[250px] w-full object-cover" :src="data.images[0]"
                                 alt="product image" />
@@ -90,9 +90,11 @@
 
                 <div class="grid grid-cols-1 justify-items-center mt-10">
                     <button v-if="products.length >= 12" @click="nextPage" type="button"
-                        class="w-fit text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Next
-                        Pages</button>
+                        class="w-fit text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        Next Pages
+                    </button>
                 </div>
+
             </div>
         </section>
     </div>
@@ -108,6 +110,7 @@ export default {
         const toast = useToast();
         return {
             products,
+            listProduct: [],
             id: this.$route.params.id,
             search: {
                 title: '',
@@ -115,20 +118,24 @@ export default {
                 min_price: ''
             },
             offset: 0,
-            toast,
+            toast
         }
     },
     async mounted() {
-        this.getProductAll();
+        await this.getProductAll();
+        if (this.getProductAll()) {
+           this.listProduct = this.products;
+        }
     },
     methods: {
-        getProductAll() {
-            const { getProductByCategory } = useProductStore();
-            getProductByCategory(this.id, this.search.title, this.search.max_price, this.search.min_price, this.offset)
+        async getProductAll() {
+            const { getProductByCategory } = await useProductStore();
+            await getProductByCategory(this.id, this.search.title, this.search.max_price, this.search.min_price, this.offset);
         },
         nextPage() {
             this.offset += 12;
             this.getProductAll();
+            this.listProduct.push(...this.products)
         },
         view(id) {
             this.$router.push('/detail-product/' + id)
@@ -136,7 +143,7 @@ export default {
         addToCart(data) {
             const { addToCart } = useProductStore();
             addToCart(data);
-            this.toast.success("Add to Cart Success")
+            this.toast.success("Add to Cart Success");
         },
     },
 }
