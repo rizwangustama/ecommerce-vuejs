@@ -14,7 +14,8 @@ export const useProductStore = defineStore({
         loading: false,
         detail: {},
         cart: JSON.parse(localStorage.getItem('cart')) || [],
-        categoryList: []
+        categoryList: [],
+        detailCategory: {},
     }),
     actions: {
         async getProduct(setOff, title) {
@@ -90,11 +91,21 @@ export const useProductStore = defineStore({
         },
         async getCategory() {
             try {
-                const res = await API.get(`categories`)
+                const res = await API.get(`/categories`)
                 this.categoryList = res.data;
             } catch (error) {
                 
             }
+        },
+        async categorySelect(id) {
+            try {
+                const res = await API.get(`/categories/${id}`);
+                await console.log(res);
+                this.detailCategory = res.data;
+            } catch (error) {
+                
+            }
+           
         }
     }
 })

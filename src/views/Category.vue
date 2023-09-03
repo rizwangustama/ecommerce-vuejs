@@ -1,17 +1,22 @@
 <template>
     <div>
+        <div class="container mt-10">
+            <div class="border-2 border-solid py-20 rounded-lg">
+                <h1 class="text-center text-3xl font-bold text-gray-600">{{ detailCategory.name }}</h1>
+            </div>
+        </div>
         <!-- filter -->
         <section class="container">
             <div class="grid grid-cols-2 gap-5">
                 <div class="grid grid-cols-2 gap-5 pt-20">
                     <div>
                         <label for="min_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Min Price</label>
-                        <input @input="getProductAll" v-model="search.min_price" type="number" id="min_price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Minimal Price" required>
+                        <input @input="getProductAll(true)" v-model="search.min_price" type="number" id="min_price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Minimal Price" required>
                         <!-- <p class="text-red-500">Erro Tidak boleh memasukan angka lebih dari maxprice</p> -->
                     </div>
                     <div>
                         <label for="max_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Max Price</label>
-                        <input @input="getProductAll" type="number" v-model="search.max_price" id="max_price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Maximal Price" required>
+                        <input @input="getProductAll(true)" type="number" v-model="search.max_price" id="max_price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Maximal Price" required>
                     </div>
                 </div>
                 <div class="flex items-end">
@@ -23,7 +28,7 @@
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                 </svg>
                             </div>
-                            <input @input="getProductAll" v-model="search.title" type="search" id="default-search" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Products..." required>
+                            <input @input="getProductAll(true)" v-model="search.title" type="search" id="default-search" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Products..." required>
                         </div>
                     </form>
                 </div>
@@ -106,7 +111,7 @@ import { useProductStore } from '../stores/product';
 import { useToast } from 'vue-toastification'
 export default {
     data() {
-        const { products, } = storeToRefs(useProductStore());
+        const { products, detailCategory } = storeToRefs(useProductStore());
         const toast = useToast();
         return {
             products,
@@ -118,19 +123,25 @@ export default {
                 min_price: ''
             },
             offset: 0,
-            toast
+            toast,
+            detailCategory,
         }
     },
     async mounted() {
         await this.getProductAll();
+        this.getDetailCategory()
         if (this.getProductAll()) {
            this.listProduct = this.products;
-        }
+        };
+        
     },
     methods: {
-        async getProductAll() {
+        async getProductAll(option) {
             const { getProductByCategory } = await useProductStore();
             await getProductByCategory(this.id, this.search.title, this.search.max_price, this.search.min_price, this.offset);
+            if (option) {
+                this.listProduct = this.products;
+            }
         },
         nextPage() {
             this.offset += 12;
@@ -145,6 +156,10 @@ export default {
             addToCart(data);
             this.toast.success("Add to Cart Success");
         },
+        getDetailCategory(){
+            const { categorySelect } = useProductStore();
+            categorySelect(this.id)
+        }
     },
 }
 </script>

@@ -58,7 +58,7 @@
                                 <div  class="top-full bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
                                         <li v-for="(item , index) in categoryList">
-                                            <a @click="goToCategori(item.id)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ item.name }}</a>
+                                            <a @click="goToCategori(item.id, item.name)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ item.name }}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -70,7 +70,7 @@
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">{{ $t('label.features') }}</a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/ourteam"
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">{{ $t('label.team') }}</a>
                         </li>
                         <li>
@@ -167,7 +167,7 @@ export default {
             const { logout } = useLoginStore();
             logout();
         },
-        async goToCategori(id) {
+        async goToCategori(id, name) {
             await this.$router.push(`/category/${id}`);
             window.location.reload()
             // window.location.href(`/category/${id}`)

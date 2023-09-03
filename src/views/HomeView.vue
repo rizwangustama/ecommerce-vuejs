@@ -47,20 +47,20 @@
       <div class="flex flex-row gap-6 items-end">
           <div class="w-2/12">
             <label for="min_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Min Price</label>
-            <input @input="getProductAll" v-model="search.min_price" type="number" id="min_price"
+            <input @input="getProductAll(true)" v-model="search.min_price" type="number" id="min_price"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Minimal Price" required>
           </div>
           <div class="w-2/12">
             <label for="max_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Max Price</label>
-            <input @input="getProductAll" type="number" v-model="search.max_price" id="max_price"
+            <input @input="getProductAll(true)" type="number" v-model="search.max_price" id="max_price"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Maximal Price" required>
           </div>
           <div class="w-3/12">
             <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Max Price</label>
-            <select @change="getProductAll" v-model="search.category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option value="" selected disabled>Category</option>
+            <select @change="getProductAll(true)" v-model="search.category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option value="0" selected>Category</option>
               <option v-for="(item, index) in categoryList" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
@@ -75,7 +75,7 @@
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                 </svg>
               </div>
-              <input @input="getProductAll" v-model="search.title" type="search" id="default-search"
+              <input @input="getProductAll(true)" v-model="search.title" type="search" id="default-search"
                 class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search Products..." required>
             </div>
@@ -181,7 +181,7 @@ export default {
       offset: 0,
       categoryList,
       search: {
-        category: '',
+        category: 0,
         title: '',
         max_price: '',
         min_price: ''
@@ -199,12 +199,13 @@ export default {
     this.listProduct = this.products;
   },
   methods: {
-    async getProductAll() {
-      const offset = this.offset;
-      const title = this.search.title;
+    async getProductAll(option) {
       const { getProduct, getProductByCategory, getCategory } = await useProductStore();
       await getProductByCategory(this.search.category, this.search.title, this.search.max_price, this.search.min_price, this.offset);
       await getCategory();
+      if (option) {
+        this.listProduct = this.products;
+      }
     },
     showDropdown() {
       this.isActive = !this.isActive;
