@@ -41,8 +41,13 @@
                 </div>
 
                 <div class="flex items-center justify-between border-t border-gray-300 pt-10">
-                    <h1 class="text-2xl font-bold">Total Price : {{ this.formatPrice(total) }}</h1>
-                    <Button :disabled="total < 1" color="default">Checkout</Button>
+                    <div>
+                        <h1 class="text-2xl font-bold">Total Price : {{ this.formatPrice(total) }}</h1>
+                    </div>
+                   
+                    <div class="flex items-end gap-4">
+                        <Button :disabled="total < 1" color="default" size="lg" class="h-fit">Checkout</Button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,13 +72,14 @@
 <script>
 import { storeToRefs } from 'pinia';
 import { useProductStore } from '../stores/product';
-import { Modal, Button } from 'flowbite-vue';
+import { Modal, Button, Input } from 'flowbite-vue';
 import { useToast } from "vue-toastification";
 
 export default {
     components: {
         Modal,
-        Button
+        Button,
+        Input
     },
     data() {
         const { cart } = storeToRefs(useProductStore());

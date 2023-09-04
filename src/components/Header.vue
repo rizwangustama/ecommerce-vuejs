@@ -8,7 +8,7 @@
                     <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
                 </a>
                 <div class="flex items-center lg:order-2 gap-5">
-                    <div class="relative" @click="goToCart">
+                    <div class="relative cursor-pointer" @click="goToCart">
                         <svg class="w-5 h-5 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1"/>
                         </svg>
@@ -16,11 +16,11 @@
                         <div v-if="totalCart >= 1" class="absolute inline-flex items-center justify-center w-5 h-5 text-[8px] font-bold text-white bg-red-500 border-2 border-white rounded-full -top-3 -right-3 dark:border-gray-900">{{ totalCart }}</div>
                     </div>
 
-                    <div @click="showProfile" class="relative">
+                    <div @click="showProfile" class="relative cursor-pointer">
                         <Avatar size="sm" status="online" :img="user.avatar" rounded/>
                     </div>
                    
-                    <Button color="default" @click="changeLanguage(!changeBahasa ? 'fr': 'en')">{{ changeBahasa ? 'Indonesia' : 'English'}}</Button>
+                    <Button color="default" class="cursor-pointer" @click="changeLanguage(!changeBahasa ? 'fr': 'en')">{{ changeBahasa ? 'Indonesia' : 'English'}}</Button>
                     <!-- <Button color="alternative" v-else @click="changeLanguage('fr')">Indonesia</Button> -->
                     <Button @click="logout" class="hover:text-black" color="alternative">
                         Logout
@@ -57,8 +57,8 @@
                             <div id="categoryHover" class="z-10 absolute top-0 pt-[80px]">
                                 <div  class="top-full bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
-                                        <li v-for="(item , index) in categoryList">
-                                            <a @click="goToCategori(item.id)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ item.name }}</a>
+                                        <li class="cursor-pointer" v-for="(item , index) in categoryList">
+                                            <a @click="goToCategori(item.id, item.name)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ item.name }}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -70,7 +70,7 @@
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">{{ $t('label.features') }}</a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/ourteam"
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">{{ $t('label.team') }}</a>
                         </li>
                         <li>
@@ -167,7 +167,7 @@ export default {
             const { logout } = useLoginStore();
             logout();
         },
-        async goToCategori(id) {
+        async goToCategori(id, name) {
             await this.$router.push(`/category/${id}`);
             window.location.reload()
             // window.location.href(`/category/${id}`)

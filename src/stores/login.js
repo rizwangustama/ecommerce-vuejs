@@ -55,7 +55,8 @@ export const useLoginStore = defineStore({
             this.detailUser.isLogin = await false;
             await localStorage.removeItem('token');
             await router.push('/login');
-            await toast.success("Success logout")
+            await toast.success("Success logout");
+            window.location.reload()
         }
     },
 
