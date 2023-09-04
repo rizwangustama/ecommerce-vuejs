@@ -6,6 +6,16 @@ This template should help get you started developing with Vue 3 in Vite.
 1. Multi Bahasa, Bahasa Indonesia dan Bahasa Inggris
 2. Belum ada Fitur Checkout
 3. Halaman Detail Product Blum Rapih
+
+
+## Masuk Aplikasi
+```sh
+username/email : john@mail.com
+```
+
+```sh
+Password : changeme
+```
    
 
 ## Recommended IDE Setup
