@@ -2,6 +2,12 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
+## List Task Yang Belum dikerjakan
+1. Multi Bahasa, Bahasa Indonesia dan Bahasa Inggris
+2. Belum ada Fitur Checkout
+3. Halaman Detail Product Blum Rapih
+   
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
