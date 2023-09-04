@@ -2,6 +2,17 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
+## List Task Yang Sudah Dikerjakan
+1. Login
+2. Resigter
+3. Home Page
+4. Detail Product
+5. Cart
+6. Session login
+7. Next Pages
+8. Filter By Category, Range Price
+
+   
 ## List Task Yang Belum dikerjakan
 1. Multi Bahasa, Bahasa Indonesia dan Bahasa Inggris
 2. Belum ada Fitur Checkout
