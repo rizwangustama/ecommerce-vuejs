@@ -9,12 +9,15 @@ This template should help get you started developing with Vue 3 in Vite.
 
 
 ## Masuk Aplikasi
+
+### username / email 
 ```sh
-username/email : john@mail.com
+john@mail.com
 ```
 
+### Password
 ```sh
-Password : changeme
+changeme
 ```
    
 
@@ -27,7 +30,6 @@ Password : changeme
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
-
 ```sh
 npm install
 ```
