@@ -21,9 +21,8 @@
                     </div>
                    
                     <Button color="default" class="cursor-pointer" @click="changeLanguage(!changeBahasa ? 'fr': 'en')">{{ changeBahasa ? 'Indonesia' : 'English'}}</Button>
-                    <!-- <Button color="alternative" v-else @click="changeLanguage('fr')">Indonesia</Button> -->
                     <Button @click="logout" class="hover:text-black" color="alternative">
-                        Logout
+                        {{ $t('label.logout') }}
                     </Button>
                   
                     <button data-collapse-toggle="mobile-menu-2" type="button"

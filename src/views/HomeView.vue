@@ -42,25 +42,25 @@
       </div>
     </section>
 
-    <!-- Search -->
+    <!-- Filter Search -->
     <section class="container pt-20">
       <div class="flex flex-row gap-6 items-end">
           <div class="w-2/12">
-            <label for="min_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Min Price</label>
+            <label for="min_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t('label.min_price') }}</label>
             <input @input="getProductAll(true)" v-model="search.min_price" type="number" id="min_price"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Minimal Price" required>
+              :placeholder="$t('label.input_min_price')" required>
           </div>
           <div class="w-2/12">
-            <label for="max_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Max Price</label>
+            <label for="max_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t('label.max_price') }}</label>
             <input @input="getProductAll(true)" type="number" v-model="search.max_price" id="max_price"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Maximal Price" required>
+              :placeholder="$t('label.input_max_price')" required>
           </div>
           <div class="w-3/12">
-            <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Max Price</label>
+            <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $t('label.category') }}</label>
             <select @change="getProductAll(true)" v-model="search.category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option value="0" selected>Category</option>
+              <option value="0" selected>All Category</option>
               <option v-for="(item, index) in categoryList" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
@@ -77,7 +77,7 @@
               </div>
               <input @input="getProductAll(true)" v-model="search.title" type="search" id="default-search"
                 class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search Products..." required>
+                :placeholder="$t('label.search_products')" required>
             </div>
           </form>
         </div>
@@ -86,6 +86,7 @@
     <section class="pt-10 pb-[120px]">
       <div class="container">
         <div class="grid grid-cols-4 gap-4">
+          <!-- Card -->
           <div v-for="(data, index) in listProduct" class="shadow-lg flex flex-col justify-between rounded-xl">
             <a class="cursor-pointer p-5 rounded-t-xl " @click="view(data.id)">
               <img class="overflow-hidden rounded-lg h-[250px] w-full object-cover" :src="data.images[0]"
@@ -126,22 +127,17 @@
               </div>
               <div class="flex items-center justify-between">
                 <span class="text-3xl font-bold text-gray-900 dark:text-white">{{ this.formatPrice(data.price) }}</span>
-                <Button color="blue" @click="addToCart(data)">Add to Cart</Button>
+                <Button color="blue" @click="addToCart(data)">{{ $t('label.add_to_cart') }}</Button>
               </div>
             </div>
           </div>
-        </div>
 
+        </div>
         <div v-show="products.length < 1" class="border border-gray-100 py-20">
-          <h1 class="text-2xl font-semibold text-center text-gray-500">Not Found Products</h1>
+          <h1 class="text-2xl font-semibold text-center text-gray-500">{{ $t('label.not_found_products') }}</h1>
         </div>
-
         <div class="grid grid-cols-1 justify-items-center mt-10">
-          <!-- <button v-if="products.length >= 12" @click="nextPage" type="button"
-            class="w-fit text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Next
-            Pages</button> -->
-
-            <Button v-if="products.length >= 12" @click="nextPage" size="lg" color="default" outline>Next Pages</Button>
+            <Button v-if="products.length >= 12" @click="nextPage" size="lg" color="default" outline>{{ $t('label.next_pages') }}</Button>
         </div>
       </div>
     </section>
