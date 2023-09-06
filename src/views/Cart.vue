@@ -70,6 +70,7 @@
 </template>
 
 <script>
+
 import { storeToRefs } from 'pinia';
 import { useProductStore } from '../stores/product';
 import { Modal, Button, Input } from 'flowbite-vue';
