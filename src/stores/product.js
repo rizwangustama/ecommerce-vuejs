@@ -21,13 +21,34 @@ export const useProductStore = defineStore({
         async getProduct(setOff, title) {
             this.products = [];
             this.loading = true;
-            const params = {
-                offset: setOff,
-                limit: 12,
-                title: title
+            // const params = {
+            //     offset: setOff,
+            //     limit: 12,
+            //     title: title
+            // }
+            let getOffset = '';
+            let limit = 12;
+            let getTitle = '';
+
+            if (setOff) {
+                getOffset = `offset=${setOff}`;
             }
+
+            if (title) {
+                getTitle = `&title=${title}`;
+            }
+
+            // if (setOff) {
+            //     const offset = `offset=${setOff}`;
+            //     alert("hadeuh")
+            // }
+
+            // if (title) {
+            //     const setTitle = `&title=${title}`;
+            // }
+
             try {
-                const res = await API.get(`/products?offset=${params.offset}&limit=${params.limit}&title=${params.title}`);
+                const res = await API.get(`/products?${getOffset}&limit=${limit}${getTitle}`);
                 this.products = res.data;
             } catch (error) {
                 this.error = error;
