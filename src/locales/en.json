@@ -17,6 +17,14 @@
        "confirm_password": "Confirm password",
        "remember_me" : "Remember Me",
        "forgot_password" : "Forgot Password",
-       "dont_have_account": "Don't have an account yet?"
+       "dont_have_account": "Don't have an account yet?",
+       "min_price": "Min Price",
+       "input_min_price" : "Input Mininal Price",
+       "max_price": "Max Price",
+       "input_max_price": "Input Maximal Price",
+       "search_products": "Search Products...",
+       "add_to_cart": "Add To Cart",
+       "next_pages": "Next Pages",
+       "not_found_products" : "Not Found Products"
     }
 }
