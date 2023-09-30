@@ -11,6 +11,7 @@ This template should help get you started developing with Vue 3 in Vite.
 6. Session login
 7. Next Pages
 8. Filter By Category, Range Price
+9. Search
 
    
 ## List Task Yang Belum dikerjakan
